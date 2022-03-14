@@ -3,7 +3,6 @@ const breads = express.Router();
 const Bread = require("../models/bread.js");
 
 // INDEX
-// INDEX
 breads.get("/", (req, res) => {
     res.render("Index", {
         breads: Bread,
@@ -11,7 +10,6 @@ breads.get("/", (req, res) => {
     // res.send(Bread)
 });
 
-// CREATE
 // CREATE
 breads.post("/", (req, res) => {
     if (!req.body.image) {
@@ -32,17 +30,25 @@ breads.get("/new", (req, res) => {
     res.render("new");
 });
 
+// SHOW
 breads.get("/:arrayIndex", (req, res) => {
     // res.send(Bread[req.params.arrayIndex]);
     const breadJSON = Bread[req.params.arrayIndex];
     if (breadJSON) {
         res.render("Show", {
             bread: breadJSON,
+            index: req.params.arrayIndex,
         });
     } else {
         // res.send("Sorry, that bread is not found");
         res.render("notfound");
     }
+});
+
+// DELETE
+breads.delete("/:indexArray", (req, res) => {
+    Bread.splice(req.params.indexArray, 1);
+    res.status(303).redirect("/breads");
 });
 
 module.exports = breads;
