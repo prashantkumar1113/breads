@@ -3,6 +3,16 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
+
+const mongoose = require("mongoose");
+mongoose.connect(
+    process.env.MONGO_URI,
+    {useNewUrlParser: true, useUnifiedTopology: true},
+    () => {
+        console.log("connected to mongo: ", process.env.MONGO_URI);
+    }
+);
+
 const methodOverride = require("method-override");
 
 // MIDDLEWARE
@@ -13,7 +23,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 
-//ROUTES
+// ROUTES
 // INDEX
 app.get("/", (req, res) => {
     res.send("Bread App");
