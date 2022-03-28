@@ -1,7 +1,7 @@
 const React = require("react");
 const Default = require("./layouts/Default");
 
-function Edit({bread}) {
+function Edit({bread, bakers}) {
     return (
         <Default>
             <h2>Edit a bread</h2>
