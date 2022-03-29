@@ -15,12 +15,16 @@ function Show({baker}) {
             <h3>Breads {baker.name} has baked</h3>
             <ul>
                 {baker.breads.map((bread) => {
-                    return <li key={bread.id}>{bread.name}</li>;
+                    return (
+                        <li key={bread.id}>
+                            <a href={`/breads/${bread.id}`}>{bread.name}</a>
+                        </li>
+                    );
                 })}
             </ul>
 
             <form action={`/bakers/${baker.id}?_method=DELETE`} method="POST">
-                <input type="submit" value="DELETE" />
+                <input type="submit" value="DELETE BAKER" />
             </form>
         </Default>
     );
